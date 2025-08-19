@@ -40,7 +40,31 @@ function news25_enqueue_assets() {
         );
     }
 
-    // 4) JS custom (dipende da jQuery)
+    // 4) CSS layout
+    $layout_rel = 'assets/css/layout.css';
+    $layout_path = get_theme_file_path($layout_rel);
+    if (file_exists($layout_path)) {
+        wp_enqueue_style(
+            'news25-layout',
+            get_theme_file_uri($layout_rel),
+            ['news25'],
+            filemtime($layout_path)
+        );
+    }
+
+    // 5) CSS typography
+    $typography_rel = 'assets/css/typography.css';
+    $typography_path = get_theme_file_path($typography_rel);
+    if (file_exists($typography_path)) {
+        wp_enqueue_style(
+            'news25-typography',
+            get_theme_file_uri($typography_rel),
+            ['news25'],
+            filemtime($typography_path)
+        );
+    }
+
+    // 6) JS custom (dipende da jQuery)
     $js_rel  = 'js/custom.js';
     $js_path = get_theme_file_path($js_rel);
     if ( file_exists($js_path) ) {
