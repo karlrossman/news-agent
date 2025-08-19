@@ -1,0 +1,32 @@
+# Node / build
+node_modules/
+npm-debug.log*
+yarn.lock
+package-lock.json
+
+# wp-env / Docker
+.wp-env/
+.wp-env.json.tmp
+wordpress-develop/
+docker-compose.override.yml
+
+# Composer
+vendor/
+composer.lock
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+
+# Log e cache
+*.log
+*.cache
+
+# Editor/IDE
+.vscode/
+.idea/
+*.swp
+
+# Build / distribuzione
+/dist/
+/build/
