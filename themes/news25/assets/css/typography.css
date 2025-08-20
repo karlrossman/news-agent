@@ -1,0 +1,26 @@
+/*
+ * Typography
+ *
+ * Basic typographic styles and webfont imports.
+ */
+
+/* 1. Webfont Imports */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/* 2. CSS Variables */
+:root {
+	--colore-nero: #000000;
+	--colore-grigio-scuro: #333333;
+	--colore-grigio-chiaro: #bcbcbc;
+	--colore-bianco: #FFFFFF;
+
+	/* Font Families */
+	--font-primary: 'Roboto', sans-serif;
+}
+
+/* 3. Base Styles */
+body {
+	font-family: var(--font-primary);
+	color: var(--colore-nero);
+	background-color: var(--colore-bianco);
+}
