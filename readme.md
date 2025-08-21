@@ -45,7 +45,7 @@ npx wp-env destroy   # resetta l’ambiente (ATTENZIONE: cancella DB)
 ## installazione libera (xampp, mamp, wamp, hosting remoto, ecc.)
 Questa opzione è adatta se hai già un WordPress installato o vuoi lavorare su hosting.
 
-### Versioni del software uata per lo sviluppo
+### Versioni del software utilizzato per lo sviluppo
 - PHP 8.2 (consigliato) o 8.1  
 - MySQL 8.0 / MariaDB 10.6+  
 - WordPress 6.6+  
