@@ -9,7 +9,7 @@
 <header id="masthead" class="site-header">
 	<div class="container">
 		<div class="site-branding">
-			<?php the_custom_logo(); ?>
+			<?php news25_the_custom_logo(); ?>
 		</div><!-- .site-branding -->
 
 		<nav id="site-navigation" class="site-navigation">
