@@ -82,3 +82,94 @@ function news25_enqueue_assets() {
     }
 }
 add_action('wp_enqueue_scripts', 'news25_enqueue_assets', 20);
+
+// =========================================================================
+// 2. SUPPORTO AL LOGO
+// =========================================================================
+
+/**
+ * Aggiunge il supporto per il logo personalizzato.
+ */
+function news25_logo_setup() {
+    add_theme_support('custom-logo', [
+        'height'      => 100,
+        'width'       => 400,
+        'flex-height' => true,
+        'flex-width'  => true,
+    ]);
+}
+add_action('after_setup_theme', 'news25_logo_setup');
+
+/**
+ * Registra le impostazioni del Customizer per il logo.
+ *
+ * @param WP_Customize_Manager $wp_customize Oggetto Customizer.
+ */
+function news25_customize_register($wp_customize) {
+    // Pannello impostazioni tema
+    $wp_customize->add_panel('news25_theme_panel', [
+        'title'    => __('Impostazioni Tema News25', 'news25'),
+        'priority' => 10,
+    ]);
+
+    // Sezione per il logo
+    $wp_customize->add_section('news25_logo_section', [
+        'title'    => __('Gestione Logo', 'news25'),
+        'panel'    => 'news25_theme_panel',
+        'priority' => 10,
+    ]);
+
+    // Impostazione per il logo retina
+    $wp_customize->add_setting('news25_retina_logo', [
+        'default'           => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ]);
+
+    // Controllo per il logo retina
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'news25_retina_logo', [
+        'label'    => __('Logo Retina (2x)', 'news25'),
+        'section'  => 'news25_logo_section',
+        'settings' => 'news25_retina_logo',
+    ]));
+
+    // Impostazione per il logo mobile
+    $wp_customize->add_setting('news25_mobile_logo', [
+        'default'           => '',
+        'sanitize_callback' => 'esc_url_raw',
+    ]);
+
+    // Controllo per il logo mobile
+    $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, 'news25_mobile_logo', [
+        'label'    => __('Logo Mobile', 'news25'),
+        'section'  => 'news25_logo_section',
+        'settings' => 'news25_mobile_logo',
+    ]));
+}
+add_action('customize_register', 'news25_customize_register');
+
+/**
+ * Mostra il logo del sito con supporto per retina e mobile.
+ */
+function news25_the_custom_logo() {
+    $custom_logo_id = get_theme_mod('custom_logo');
+    $retina_logo_url = get_theme_mod('news25_retina_logo');
+    $mobile_logo_url = get_theme_mod('news25_mobile_logo');
+    $logo_image_url = wp_get_attachment_image_url($custom_logo_id, 'full');
+
+    $output = '';
+
+    if (wp_is_mobile() && !empty($mobile_logo_url)) {
+        $output = '<a href="' . esc_url(home_url('/')) . '" rel="home">';
+        $output .= '<img src="' . esc_url($mobile_logo_url) . '" alt="' . get_bloginfo('name') . '">';
+        $output .= '</a>';
+    } elseif ($custom_logo_id) {
+        $output = '<a href="' . esc_url(home_url('/')) . '" rel="home">';
+        $srcset = !empty($retina_logo_url) ? ' srcset="' . esc_url($retina_logo_url) . ' 2x"' : '';
+        $output .= '<img src="' . esc_url($logo_image_url) . '" alt="' . get_bloginfo('name') . '"' . $srcset . '>';
+        $output .= '</a>';
+    } else {
+        $output = '<a href="' . esc_url(home_url('/')) . '" rel="home">' . get_bloginfo('name') . '</a>';
+    }
+
+    echo $output;
+}
