@@ -1,39 +1,164 @@
 @charset "utf-8";
-/*--------------BURGER-MENU----------------*/
-@media all and (max-width: 1020px) {
-  #menu { width:100%; height:100%; }
 
-  #menu #menu-nav{
-    display:none;                 /* chiuso di default */
-    position:fixed; left:0; top:0; width:100%; height:100vh;
-    background:#000; z-index:10000;
-    padding:90px 30px 30px; overflow-y:auto;
-  }
+/*
+==========================================================================
+    BURGER MENU E NAVIGAZIONE MOBILE
+==========================================================================
+*/
 
-  #menu #menu-nav li{ border-top:1px solid #ddd; cursor: pointer;}
-  #menu #menu-nav li:nth-last-of-type(1){ border-bottom:1px solid #ddd; }
+/* Stili per il burger menu (sotto i 1021px) */
+@media all and (max-width: 1021px) {
+    .site-header .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
-  #menu a{ color:#fff; padding:14px 16px; text-decoration:none; font-size:17px; display:block; }
-  #menu a.burg-icon{ background:transparent; display:block; position:absolute; right:0; top:0; z-index:10001; color:#fff; }
-  i.fa-bars{ font-size:2em; }
+    .menu-toggle {
+        display: block; /* Mostra il bottone del burger */
+    }
 
-  /* Submenu accordion */
-  #menu #menu-nav .sub-menu{ display:none; padding-left:20px; }
-  #menu #menu-nav ul .sub-menu{ border-top:none; padding-left:20px; }
-  #menu #menu-nav .menu-item-has-children > a{ position:relative; }
-  #menu #menu-nav .menu-item-has-children > a::after{
-    content:'+'; position:absolute; right:15px; top:50%; transform:translateY(-50%); font-size:22px; color:#fff; }
-  #menu #menu-nav li.active > a{ background:#1c1c1c; font-weight:bold; }
-  #menu #menu-nav li.active > a::after{ content:'−'; }
-  #menu #menu-nav li.active > .sub-menu{ display:block; background:#111; }
-  #menu #menu-nav .sub-menu a{ padding-left:30px; font-size:16px; border-color:#444; }
+    .site-navigation {
+        display: none; /* Nasconde il menu di navigazione */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: #000;
+        z-index: 10000;
+        padding: 90px 30px 30px;
+        overflow-y: auto;
+    }
 
-  /* quando aperto */
-  body.nav-open #menu #menu-nav{ display:block; }
+    .site-navigation.toggled-on {
+        display: block; /* Mostra il menu quando aperto */
+    }
 
-  /* nascondi il nav orizzontale quando l’overlay è aperto */
- /* body.nav-open header#header nav#menu .menu-main-container,
-  body.nav-open header#header nav#menu ul#menu-nav.menu{
-    visibility:hidden; pointer-events:none;
-  }*/
+    .site-navigation ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .site-navigation li {
+        border-top: 1px solid #ddd;
+        cursor: pointer;
+    }
+
+    .site-navigation li:last-child {
+        border-bottom: 1px solid #ddd;
+    }
+
+    .site-navigation a {
+        color: #fff;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+        display: block;
+    }
+
+    /* Stili per sottomenu */
+    .site-navigation .sub-menu {
+        display: none;
+        padding-left: 20px;
+    }
+
+    .site-navigation .menu-item-has-children > a {
+        position: relative;
+    }
+
+    .site-navigation .menu-item-has-children > a::after {
+        content: '+';
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 22px;
+        color: #fff;
+    }
+
+    .site-navigation li.active > a {
+        background: #1c1c1c;
+        font-weight: bold;
+    }
+
+    .site-navigation li.active > a::after {
+        content: '−';
+    }
+
+    .site-navigation li.active > .sub-menu {
+        display: block;
+        background: #111;
+    }
+
+    .site-navigation .sub-menu a {
+        padding-left: 30px;
+        font-size: 16px;
+        border-color: #444;
+    }
+}
+
+/*
+==========================================================================
+    NAVIGAZIONE DESKTOP
+==========================================================================
+*/
+
+/* Stili per la navigazione desktop (sopra i 1021px) */
+@media all and (min-width: 1022px) {
+    .menu-toggle {
+        display: none; /* Nasconde il bottone del burger */
+    }
+
+    .site-header .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .site-navigation {
+        display: block !important; /* Assicura che la navigazione sia visibile */
+    }
+
+    .site-navigation ul#primary-menu {
+        display: flex;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .site-navigation ul#primary-menu > li {
+        margin-left: 20px;
+    }
+
+    .site-navigation ul#primary-menu > li > a {
+        text-decoration: none;
+        padding: 10px;
+    }
+
+    /* Gestione sottomenu desktop */
+    .site-navigation .sub-menu {
+        display: none;
+        position: absolute;
+        background-color: #fff;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        z-index: 1000;
+        list-style: none;
+        padding: 0;
+    }
+
+    .site-navigation li:hover > .sub-menu {
+        display: block;
+    }
+
+    .site-navigation .sub-menu li {
+        width: 200px;
+    }
+
+    .site-navigation .sub-menu a {
+        padding: 10px 15px;
+        display: block;
+        color: #333;
+    }
 }
